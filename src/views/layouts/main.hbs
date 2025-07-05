@@ -1,0 +1,30 @@
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{title}}</title>
+    <style>
+      body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6fb; margin: 0; padding: 0; color: #2d3a4b; } header { background: #2563eb; color: #fff; padding: 28px 0 16px 0; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); } header h1 { margin: 0 0 10px 0; font-size: 2rem; letter-spacing: 1px; } nav { margin-bottom: 8px; } nav a { color: #fff; text-decoration: none; margin: 0 12px; font-weight: 500; padding: 4px 10px; border-radius: 4px; transition: background 0.2s, color 0.2s; } nav a:hover { background: #4f8cff; color: #e0e7ff; } main { max-width: 700px; margin: 32px auto 24px auto; padding: 24px; background: #fff; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); min-height: 400px; } footer { background: #f1f5f9; color: #6b7280; text-align: center; padding: 18px 0 12px 0; font-size: 1rem; border-top: 1px solid #e5e7eb; margin-top: 32px; }
+    </style>
+  </head>
+  <body>
+    {{! Header }}
+    <header>
+      <h1></h1>
+      {{! Navigation bar }}
+      <nav>
+        <a href="/"></a>
+        <a href="/"></a>
+      </nav>
+    </header>
+
+    {{! Main layout }}
+    <main>
+      {{{body}}}
+    </main>
+
+    {{! Footer }}
+    <footer>
+      <p></p>
+    </footer>
+  </body>
+</html>
