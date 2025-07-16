@@ -15,12 +15,11 @@ III. Chạy dự án
 
 IV. Quy trình tạo 1 endpoint
 
-  - Thêm route mới: Tạo file trong src/routes/ và khai báo trong src/routes/index.js.
-  - Thêm controller/model: Tạo file trong src/app/controllers/ hoặc src/app/models/.
-  - Thêm view: Tạo file .hbs trong src/views/.
-
 V. Nhắc nhở 
 
-  - Debug từ routes/index.js -> routes/endpoint.js -> controller nếu gặp lỗi
   - Chèn middleware vào trước hàm xử lí trong routes/endpoint.js
   - Ref đến tên collections (tên bảng) khi linking, thường nhầm với ref đến model
+  - NHỚ AWAIT KHI QUERY DATABASE
+  - res.json sau khi CRUD để biết được đã thực hiện thành công hay chưa?
+  - thêm hàm .lean() để trả về plain object sau khi fetch 1 mảng data gửi cho view
+

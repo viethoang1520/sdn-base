@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+>
+  <title>Sections Management</title>
+</head>
+<body>
+  <div class="container">
+    <div class="section">
+      <div class="level">
+        <div class="level-left">
+          <h1 class="title">Course Sections</h1>
+        </div>
+        <div class="level-right">
+          <a href="/view/sections/add" class="button is-primary">
+            <strong>+ Add New Section</strong>
+          </a>
+        </div>
+      </div>
+
+      {{#if error}}
+        <div class="notification is-danger">
+          <p>{{error}}</p>
+        </div>
+      {{/if}}
+
+      {{#if sections}}
+        <div class="table-container">
+          <table class="table is-fullwidth is-striped is-hoverable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Duration (min)</th>
+                <th>Main Task</th>
+                <th>Course</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each sections}}
+              <tr>
+                <td>{{this.sectionName}}</td>
+                <td>{{this.sectionDescription}}</td>
+                <td>{{this.duration}}</td>
+                <td>
+                  {{#if this.isMainTask}}
+                    <span class="tag is-success">Yes</span>
+                  {{else}}
+                    <span class="tag is-light">No</span>
+                  {{/if}}
+                </td>
+                <td>{{this.course.courseName}}</td>
+                <td>
+                  <div class="buttons are-small">
+                    <a href="/view/sections/{{this._id}}/edit" class="button is-primary is-small">
+                      Edit
+                    </a>
+                    <button class="button is-danger is-small" 
+                            onclick="confirmDelete('{{this._id}}', '{{this.sectionName}}')">
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      {{else}}
+        <div class="notification is-warning">
+          <p>No sections available. <a href="/view/sections/add">Add the first section</a></p>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal" id="deleteModal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Confirm Delete</p>
+        <button class="delete" aria-label="close" onclick="closeDeleteModal()"></button>
+      </header>
+      <section class="modal-card-body">
+        <p>Are you sure you want to delete the section "<strong id="sectionNameToDelete"></strong>"?</p>
+        <p class="has-text-danger">This action cannot be undone.</p>
+      </section>
+      <footer class="modal-card-foot">
+        <form id="deleteForm" method="POST">
+          <button class="button is-danger" type="submit">Delete</button>
+        </form>
+        <button class="button" onclick="closeDeleteModal()">Cancel</button>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    function confirmDelete(sectionId, sectionName) {
+      document.getElementById('sectionNameToDelete').textContent = sectionName;
+      document.getElementById('deleteForm').action = '/view/sections/' + sectionId + '/delete';
+      document.getElementById('deleteModal').classList.add('is-active');
+    }
+
+    function closeDeleteModal() {
+      document.getElementById('deleteModal').classList.remove('is-active');
+    }
+
+    // Close modal when clicking on background
+    document.querySelector('.modal-background').addEventListener('click', closeDeleteModal);
+  </script>
+</body>
+</html>

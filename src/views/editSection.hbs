@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+  <title>Edit Section</title>
+</head>
+<body>
+  <div class="container">
+    <div class="section">
+      <div class="level">
+        <div class="level-left">
+          <h1 class="title">Edit Section</h1>
+        </div>
+        <div class="level-right">
+          <a href="/view/sections" class="button is-light">
+            <strong>← Back to Sections</strong>
+          </a>
+        </div>
+      </div>
+
+      {{#if error}}
+        <div class="notification is-danger">
+          <p>{{error}}</p>
+        </div>
+      {{/if}}
+
+      <div class="box">
+        <form action="/view/sections/{{section._id}}" method="POST">
+          <div class="field">
+            <label class="label">Section Name</label>
+            <div class="control">
+              <input 
+                class="input" 
+                type="text" 
+                name="sectionName" 
+                placeholder="Enter section name (letters, numbers, spaces only)" 
+                value="{{section.sectionName}}"
+                pattern="^[a-zA-Z0-9\s]+$"
+                title="Section name must only contain letters, numbers, and spaces"
+                required>
+            </div>
+            <p class="help">Each word will be automatically capitalized. Use only letters, numbers, and spaces.</p>
+          </div>
+
+          <div class="field">
+            <label class="label">Section Description</label>
+            <div class="control">
+              <textarea 
+                class="textarea" 
+                name="sectionDescription" 
+                placeholder="Enter section description"
+                rows="3"
+                required>{{section.sectionDescription}}</textarea>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Duration (minutes)</label>
+            <div class="control">
+              <input 
+                class="input" 
+                type="number" 
+                name="duration" 
+                placeholder="Enter duration in minutes"
+                value="{{section.duration}}"
+                min="1"
+                required>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <label class="checkbox">
+                <input type="checkbox" name="isMainTask" {{#if section.isMainTask}}checked{{/if}}>
+                <span class="checkmark"></span>
+                Is Main Task
+              </label>
+            </div>
+            <p class="help">Toggle this if this section represents a main task.</p>
+          </div>
+
+          <div class="field">
+            <label class="label">Course</label>
+            <div class="control">
+              <div class="select is-fullwidth">
+                <select name="course" required>
+                  <option value="">Select a course</option>
+                  {{#each courses}}
+                    <option value="{{this._id}}" {{#if this.selected}}selected{{/if}}>
+                      {{this.courseName}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-primary" type="submit">
+                <strong>Update Section</strong>
+              </button>
+            </div>
+            <div class="control">
+              <a href="/view/sections" class="button is-light">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .checkbox {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    
+    .checkbox input[type="checkbox"] {
+      margin-right: 0.5rem;
+      transform: scale(1.2);
+    }
+  </style>
+</body>
+</html>
