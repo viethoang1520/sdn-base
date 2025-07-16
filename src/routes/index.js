@@ -1,7 +1,7 @@
-const login = require('./login')
+const mainRouter = require('./mainRouter')
 
 function routes(app) {
-  app.use('/login', login)
+  app.use('/', mainRouter)
 }
 
 module.exports = routes
