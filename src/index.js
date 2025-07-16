@@ -23,6 +23,14 @@ app.engine('hbs', exphbs.engine({
   layoutsDir: path.join(__dirname, 'views', 'layouts'),
   extname: '.hbs',
   defaultLayout: 'main',
+  helpers: {
+    eq: function (a, b) {
+      return String(a) === String(b);
+    },
+    string: function (value) {
+      return String(value);
+    }
+  }
 }));
 app.set('view engine', 'hbs');
 app.set("views", path.join(__dirname, "views"));

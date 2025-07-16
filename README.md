@@ -21,4 +21,5 @@ V. Nhắc nhở
   - Ref đến tên collections (tên bảng) khi linking, thường nhầm với ref đến model
   - NHỚ AWAIT KHI QUERY DATABASE
   - res.json sau khi CRUD để biết được đã thực hiện thành công hay chưa?
+  - thêm hàm .lean() để trả về plain object sau khi fetch 1 mảng data gửi cho view
 

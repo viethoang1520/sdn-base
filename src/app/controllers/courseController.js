@@ -1,4 +1,3 @@
-const { default: mongoose } = require('mongoose')
 const MainModel = require('../models/Course')
 const SubModel = require('../models/Section')
 const getAllItem = async (req, res) => {
@@ -45,8 +44,8 @@ const updateItem = async (req, res) => {
 const deleteItem = async (req, res) => {
   const { id } = req.params
   const existingRefObject = await SubModel.findOne({ course: id })
-  if (existingRefObject != null ) {
-    res.json({'message': "Cannot delete"})
+  if (existingRefObject != null) {
+    res.json({ 'message': "Cannot delete" })
   } else {
     await MainModel.findByIdAndDelete(id)
     res.json('Delete sucessfully')
